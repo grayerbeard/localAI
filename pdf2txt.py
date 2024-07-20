@@ -1,7 +1,6 @@
 import os
 import re
 import pymupdf4llm
-from io import BytesIO
 from PIL import Image
 from pytesseract import image_to_string
 
