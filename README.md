@@ -16,4 +16,4 @@ So at the end of the note containing the converted pdf files I added a brief exp
 
 The total size of the original pdf files was 6.8MBytes and that gave a 550KB md text file file fed to Googlle Gemini Pro 1.5 using the systemsculpt AI plug in for Obsidian and then clicking the "Generate" hot key.
 
-Then the required report text was copied to a new note and output as a PDF file using Obsidian's built in 
+Then the required report text was copied to a new note and output as a PDF file using Obsidian's built in facility for outputting a Note as a pdf file.
