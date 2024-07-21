@@ -1,5 +1,5 @@
 # localAI
-Python code to use with AI on my Laptop
+Python scripts to use for AI/LLM related tasks on my Laptop
 
 # Convert a Batch of PDF Files in a Directory into a Single Text File for Feeding to an LLM.
 
