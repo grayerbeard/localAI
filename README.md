@@ -1,22 +1,45 @@
-# localAI
-Python scripts to use for AI/LLM related tasks on my Laptop
+# localAI 
 
-# Convert a Batch of PDF Files in a Directory into a Single Text File for Feeding to an LLM.
+This repository contains Python scripts designed to help you use AI and Large Language Models (LLMs) directly on your laptop, specifically within the Obsidian note-taking app.
 
-The pdf2txt.py can be used to convert a whole director full of files into a single markdown file. This is the first version of a PDF to text script that worked OK.
+## Converting PDFs for AI Analysis in Obsidian
 
-psdf2text.py was then modified by first copying the text into an Obsidian Note requesting Anthropic Claude 3.5 Sonnet to make changes. See 
-[Building make4LLM.py.md](Building%20make4LLM.py.md)
+One of the challenges of using LLMs is providing them with enough context to answer your questions effectively. This script addresses this by allowing you to convert a batch of PDF files into a single, AI-ready text file. This file can then be used with the SystemSculpt AI plugin in Obsidian to get insightful answers from your documents.
 
-I have tried using the text file output in two different ways.
-I am using the SystemSculpt AI plug in in Obsidian.
+### How it Works
 
-* Just put a question at the end and then use a hot key to send whole file to AI
-* Add in the file using the "Context Files +" button in chat then enter the question.
+1. **PDF to Text Conversion:** The script uses the `pymupdf4llm` library to extract text from your PDF files. If this fails, it uses Optical Character Recognition (OCR) as a backup, ensuring all content is captured.
 
-  In both cases its important to select and LLM able to take in such a large prompt.
-  Note that the python code adds what is iin effect a prompt template at the start of the file.
+2. **Text Cleaning:**  The extracted text often contains unwanted elements like extra spaces, page numbers, and headers/footers. The script cleans this up, making the text more suitable for AI processing.
 
-For example I had a batch of Insurance documents for a charities insurance and some pdf files with guidance on what sort of insurance that type of charity should have.
+3. **Combining into a Single File:** All the cleaned text from your PDFs is combined into a single Markdown file (.md). This file is structured to work seamlessly with the SystemSculpt AI plugin.
 
-The total size of the original pdf files was 6.8MBytes and that gave a 550KB md text file file fed to Googlle Gemini Pro 1.5 using the systemsculpt AI plug in for Obsidian and then clicking the "Generate" hot key.
+4. **Ready for SystemSculpt:** The generated Markdown file includes specific sections that SystemSculpt understands, such as "IDENTITY and PURPOSE," "OUTPUT INSTRUCTIONS," and "Context Material." This helps guide the AI and ensures you get the desired output.
+
+### Using the Script
+
+1. **Installation:** Make sure you have Python installed on your system. You'll also need to install the required libraries. You can do this by running `pip install pymupdf4llm pytesseract pillow`.
+
+2. **Obsidian Vault Setup:** 
+    - Ensure you have the SystemSculpt AI plugin installed and configured in your Obsidian vault.
+    - The script assumes a specific folder structure within your vault. You will be prompted to provide the location of your Obsidian vault and the names of your attachments folder and the folder containing your PDFs.  The script will create a file called `context.md` within your notes folder.
+
+3. **Running the Script:** 
+    - Place all the PDF files you want to analyze in the designated PDF folder within your Obsidian vault.
+    - Run the `pdf2text.py` script. 
+    - The script will prompt you for some information about your Obsidian vault structure. This helps it find your PDFs and save the output in the correct location.
+
+4. **Using with SystemSculpt:**
+    - Open the generated `context.md` file in Obsidian.
+    - You'll see your PDF content under the "Context Material" section.
+    - Simply type your question at the end of the file under the "Question" heading.
+    - Use the SystemSculpt hotkey to send the entire file to the AI.
+    - ALTERNATIVLEY you can add the context.md file as context in a chat. Click the "C" button at the bottom of the screen then click the "Context Files +" button and enter "context".  Then enter your questions.
+
+### Benefits
+
+- **Easy Context Loading:**  No more manually copying and pasting from multiple PDFs.
+- **Improved AI Accuracy:**  Clean and structured text helps the AI understand your documents better.
+- **Seamless Obsidian Integration:** Designed to work directly within your Obsidian workflow.
+
+This script simplifies the process of preparing your PDF documents for analysis with AI, making it easier than ever to extract valuable insights from your data. 
