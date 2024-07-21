@@ -75,6 +75,7 @@ class class_pdf2text():
         """
         with open(output_file, 'w', encoding='utf-8') as outfile:
             outfile.write(file_top_matter)
+            file_index_number = 1
             for filename in os.listdir(input_dir):
                 if filename.endswith('.pdf'):
                     filepath = os.path.join(input_dir, filename)
@@ -84,10 +85,12 @@ class class_pdf2text():
                     # Clean the extracted text
                     cleaned_text = self.clean_text(raw_text)
                     # Write to Markdown file
-                    outfile.write(f"# {filename}\n\n")
+                    outfile.write(f"\n\n# File Number {file_index_number} : {filename}\n")
                     outfile.write(cleaned_text)
-                    outfile.write("\n\n---\n\n")  # Separator between documents
-            outfile.write("\n\n## Question\n\n")
+                    outfile.write(f"\n## End of File {file_index_number}---\n\n")  # Separator between documents
+                file_index_number += 1    
+            outfile.write("\n\n# Question\n\n")
+        return file_index_number - 1
 
 
 def get_user_input():
@@ -141,6 +144,6 @@ You are an expert on report writer who can fully analyse all the material given 
     pdf2text = class_pdf2text()
     
     # Convert PDFs to Markdown
-    pdf2text.convert_pdfs_to_markdown(input_dir, output_file, file_top_matter)
+    number_converted = pdf2text.convert_pdfs_to_markdown(input_dir, output_file, file_top_matter)
     
-    print(f"Conversion complete. Output saved to {output_file}")
+    print(f"Conversion of {number_converted} files complete. Output saved to {output_file}")
